@@ -32,14 +32,43 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A)) tra.eulerAngles =new Vector3(0,180,0);
-        if (Input.GetKeyDown(KeyCode.D)) transform.eulerAngles = new Vector3(0, 0, 0);//這裡的tra也可不用宣告上面的private Transform tra;(下面繼續
+        if (Input.GetKeyDown(KeyCode.A)) Turn(180);             //tra.eulerAngles =new Vector3(0,180,0);
+        if (Input.GetKeyDown(KeyCode.D)) Turn(); //transform.eulerAngles = new Vector3(0, 0, 0); 這裡的tra也可不用宣告上面的private Transform tra;(下面繼續
                                                                                       //直接transform.eulerAngles = new Vector3(0, 0, 0);這樣也行
     }
     private void FixedUpdate()  //固定更新事件每禎0.002秒
     {
-       // Debug.Log(Input.GetAxis("Horizontal"));
+        Walk();//呼叫方法
+        Jump();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("碰到東西了" + collision.gameObject);
+    }
+    /// <summary>
+    /// 走路
+    /// </summary>
+    private void Walk()
+    {
         rig.AddForce(new Vector2(foxspeed * Input.GetAxis("Horizontal"), 0));
-          
+        // Debug.Log(Input.GetAxis("Horizontal"));
+    }
+    /// <summary>
+    /// 跳躍
+    /// </summary>
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            rig.AddForce(new Vector2(0,jump * Input.GetAxis("Jump")));
+    }
+    
+    //參數語法:類型 名稱 預設值
+    /// <summary>
+    /// 轉彎
+    /// </summary>
+    /// <param name="direction">方向,左轉為180,右轉為0</param>
+    private void Turn(int direction=0)
+    {
+        transform.eulerAngles = new Vector3(0, direction, 0);
     }
 }
