@@ -10,14 +10,15 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     public string foxName = "狐狸";    //字串
     public bool pass = false;          //布林值 true/false
     private Rigidbody2D rig;
-    private Transform tra;
+    //private Transform tra;
+    public bool isGround;
    
     //事件:在特定時間點會以指定頻率執行的方法
     //開始事件:遊戲開始時執行一次(下面的
     private void Start()
     {   //泛型<T>
         rig = GetComponent<Rigidbody2D>();
-        tra = GetComponent<Transform>();
+        //tra = GetComponent<Transform>();
         
 
 
@@ -43,6 +44,7 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        isGround = true;
         Debug.Log("碰到東西了" + collision.gameObject);
     }
     /// <summary>
@@ -58,8 +60,11 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     /// </summary>
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            rig.AddForce(new Vector2(0,jump * Input.GetAxis("Jump")));
+        if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
+        {
+            isGround = false;
+            rig.AddForce(new Vector2(0, jump));
+        }
     }
     
     //參數語法:類型 名稱 預設值
