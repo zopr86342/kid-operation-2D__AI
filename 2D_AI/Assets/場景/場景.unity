@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &111193587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111193589}
+  - component: {fileID: 111193588}
+  m_Layer: 0
+  m_Name: "\u7DF4\u7FD2\u7269\u4EF6"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &111193588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111193587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e16ae2af63e9f542921df4bc28b0478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColor: "\u9ED1\u8272"
+  _season: 0
+--- !u!4 &111193589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111193587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &187282527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,7 +1917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171010161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2222,7 +2264,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1937724168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.85, y: -3.289, z: 0}
+  m_LocalPosition: {x: -5.85, y: -3.45, z: 0}
   m_LocalScale: {x: 4.348188, y: 5.04036, z: 1.404}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2240,7 +2282,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.019757219}
+  m_Offset: {x: -0.009715132, y: 0.009312175}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2251,7 +2293,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.28048557}
+  m_Size: {x: 0.33056968, y: 0.23432766}
   m_EdgeRadius: 0
 --- !u!114 &1937724174
 MonoBehaviour:
@@ -2272,6 +2314,7 @@ MonoBehaviour:
   sayNotComptele: "\u4F60\u9019\u5C0F\u5EE2\u7269"
   playerProp: 0
   countProp: 0
+  objCanvas: {fileID: 1171010160}
   textSay: {fileID: 365973784}
 --- !u!1 &2075720538
 GameObject:

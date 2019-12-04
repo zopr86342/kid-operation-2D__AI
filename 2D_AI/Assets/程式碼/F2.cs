@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; //引用 介面 API
 
 public class F2 : MonoBehaviour {
+    #region 欄位
     //定義列舉
     //修飾詞 列舉 列舉名稱{ 列舉內容,.... }
     public enum state
@@ -29,20 +30,45 @@ public class F2 : MonoBehaviour {
     public int playerProp = 0;
     [Header("道具需求數量")]
     public int countProp = 0;
+    [Header("介面")]
+    public GameObject objCanvas;
     public Text textSay;
-    
-    
-    
+    #endregion
+
+    //2D觸發事件
+    private void OnTriggerEnter2D(Collider2D collision)
+    {    //如果碰到物件為"狐狸"
+        if(collision.name == "狐狸")
+        Say();
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name == "狐狸")
+          SayClose();
+        
+    }
+    /// <summary>
+    /// 對話:打字效果
+    /// </summary>
+    private void Say()
+    {
+        //畫布.顯示
+        objCanvas.SetActive(true);
+        //文字介面.文字 = 對話1
+        textSay.text = sayStart;
+    }
+    /// <summary>
+    /// 關閉對話
+    /// </summary>
+    private void SayClose()
+    {
+        objCanvas.SetActive(false);
+    }
 
 
 
-    // Use this for initialization
-    void Start () {
-		
-	}
+
+
+
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
