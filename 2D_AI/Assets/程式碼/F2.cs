@@ -54,8 +54,22 @@ public class F2 : MonoBehaviour {
     {
         //畫布.顯示
         objCanvas.SetActive(true);
-        //文字介面.文字 = 對話1
-        textSay.text = sayStart;
+        
+        //判斷式(狀態)
+        switch (_state)
+        {
+            case state.normal:
+                textSay.text = sayStart;  //文字介面.文字 = 對話1
+                break; 
+            case state.notcomplete:
+                textSay.text = sayNotComptele;
+                break; 
+            case state.comptele:
+                textSay.text = sayComptele;
+                break; 
+
+        }
+
     }
     /// <summary>
     /// 關閉對話
