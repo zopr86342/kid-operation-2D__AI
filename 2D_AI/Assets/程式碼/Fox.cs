@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;                //引用 Unity API- API=>倉庫 功能、工具
+using UnityEngine.Events;
 
 public class Fox : MonoBehaviour  //類別 類別名稱
 {
@@ -12,7 +13,8 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     private Rigidbody2D rig;
     //private Transform tra;
     public bool isGround;
-   
+    public UnityEvent onEat;
+
     //事件:在特定時間點會以指定頻率執行的方法
     //開始事件:遊戲開始時執行一次(下面的
     private void Start()
@@ -46,6 +48,14 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     {
         isGround = true;
         Debug.Log("碰到東西了" + collision.gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       if(collision.tag == "鑽石")
+        {
+            Destroy(collision.gameObject);
+            onEat.Invoke();
+        }
     }
     /// <summary>
     /// 走路

@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI; //引用 介面 API
 
 public class F2 : MonoBehaviour {
+    public AudioClip soundSay;
+    private AudioSource aud;
+    private void Start()
+    {
+        aud = GetComponent<AudioSource>();
+    }
     #region 欄位
     //定義列舉
     //修飾詞 列舉 列舉名稱{ 列舉內容,.... }
@@ -54,29 +60,51 @@ public class F2 : MonoBehaviour {
     {
         //畫布.顯示
         objCanvas.SetActive(true);
+        StopAllCoroutines();
+        if (playerProp >= countProp) _state = state.comptele;
         
         //判斷式(狀態)
         switch (_state)
         {
             case state.normal:
-                textSay.text = sayStart;  //文字介面.文字 = 對話1
+                StartCoroutine(ShowDialog(sayStart));       //開始對話
+                _state = state.notcomplete;
                 break; 
             case state.notcomplete:
-                textSay.text = sayNotComptele;
+                StartCoroutine(ShowDialog(sayNotComptele)); //開始對話未完成
                 break; 
             case state.comptele:
-                textSay.text = sayComptele;
+                StartCoroutine(ShowDialog(sayComptele));    //開始對話完成
                 break; 
 
         }
 
+    }
+    private IEnumerator ShowDialog(string say)
+    {
+        textSay.text = "";
+        for (int i = 0; i < say.Length; i++)
+        {
+            textSay.text += say[i].ToString();
+            aud.PlayOneShot(soundSay, 1.5f);
+            yield return new WaitForSeconds(sayspeed);
+        }
+        
     }
     /// <summary>
     /// 關閉對話
     /// </summary>
     private void SayClose()
     {
+        StopAllCoroutines();
         objCanvas.SetActive(false);
+    }
+    /// <summary>
+    /// 玩家取得道具
+    /// </summary>
+    public void PlayerGet()
+    {
+        countProp++;
     }
 
 
