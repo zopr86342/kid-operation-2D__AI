@@ -14,6 +14,8 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     //private Transform tra;
     public bool isGround;
     public UnityEvent onEat;
+    [Header("血量"),Range(0,100)]
+    public float hp = 100;
 
     //事件:在特定時間點會以指定頻率執行的方法
     //開始事件:遊戲開始時執行一次(下面的
@@ -85,5 +87,9 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     private void Turn(int direction=0)
     {
         transform.eulerAngles = new Vector3(0, direction, 0);
+    }
+    public void Damage(float damage)
+    {
+        hp -= damage;
     }
 }
