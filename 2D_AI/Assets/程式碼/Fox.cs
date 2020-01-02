@@ -1,13 +1,14 @@
 ﻿
 using UnityEngine;                //引用 Unity API- API=>倉庫 功能、工具
-using UnityEngine.Events;
+using UnityEngine.Events;         //引用 事件 API
+using UnityEngine.UI;             //引用 介面 API
 
 public class Fox : MonoBehaviour  //類別 類別名稱
 {
     //成員:欄位、屬性、方法、事件
     //欄位的組成=>修飾詞 類型 名稱 指定 值 ;
     public int foxspeed = 50;          //整數
-    public float jump = 2.5f;          //浮點數
+    public float jump = 400f;          //浮點數
     public string foxName = "狐狸";    //字串
     public bool pass = false;          //布林值 true/false
     private Rigidbody2D rig;
@@ -17,34 +18,76 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     [Header("血量"),Range(0,100)]
     public float hp = 100;
 
+    public Image hpBar;
+    public GameObject final;
+
+    private float hpMax;
+
+    public GameObject target;
+    public GameObject zawarudo;
+
+    float t;
+
     //事件:在特定時間點會以指定頻率執行的方法
     //開始事件:遊戲開始時執行一次(下面的
     private void Start()
     {   //泛型<T>
         rig = GetComponent<Rigidbody2D>();
         //tra = GetComponent<Transform>();
-        
+        hpMax = hp;
+        target.SetActive(false);
+        zawarudo.SetActive(false);
 
 
         // 下面這個API是輸出訊息到Unity的各種類別,
         //Debug.Log("薰嗣一生推^o^/");   //文字
-       // Debug.LogError("錯誤訊息");    //錯誤訊息
-       // Debug.LogWarning("警告訊息");  //警告訊息
-       // Debug.Log(5.3f);  //浮點數
-       // Debug.Log(false); //布林質
-       // Debug.Log(53);    //數字
+        // Debug.LogError("錯誤訊息");    //錯誤訊息
+        // Debug.LogWarning("警告訊息");  //警告訊息
+        // Debug.Log(5.3f);  //浮點數
+        // Debug.Log(false); //布林質
+        // Debug.Log(53);    //數字
 
     }
     private void Update()
     {
+        t += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.A)) Turn(180);             //tra.eulerAngles =new Vector3(0,180,0);
         if (Input.GetKeyDown(KeyCode.D)) Turn(); //transform.eulerAngles = new Vector3(0, 0, 0); 這裡的tra也可不用宣告上面的private Transform tra;(下面繼續
-                                                                                      //直接transform.eulerAngles = new Vector3(0, 0, 0);這樣也行
+                                                 //直接transform.eulerAngles = new Vector3(0, 0, 0);這樣也行
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            target.SetActive(true);
+            Instantiate(target, transform.position, transform.rotation);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1;
+            zawarudo.SetActive(false);
+        }
+        Zawarudo();
     }
     private void FixedUpdate()  //固定更新事件每禎0.002秒
     {
         Walk();//呼叫方法
         Jump();
+    }
+
+    private void Zawarudo()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            zawarudo.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if (t >= 3)
+        {
+            Time.timeScale = 1;
+            zawarudo.SetActive(false);
+            t = 0;
+            return;
+        }
+        Debug.Log(t);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -91,5 +134,14 @@ public class Fox : MonoBehaviour  //類別 類別名稱
     public void Damage(float damage)
     {
         hp -= damage;
+        hpBar.fillAmount = hp / hpMax;
+
+        if (hp <= 0)
+        {
+            final.SetActive(true);
+            Time.timeScale = 0;
+            
+        }
+
     }
 }

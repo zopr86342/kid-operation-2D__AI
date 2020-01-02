@@ -6,6 +6,8 @@ TagManager:
   tags:
   - "y\u8155\u6642"
   - "\u947D\u77F3"
+  - bullet
+  - mouse
   layers:
   - Default
   - TransparentFX
